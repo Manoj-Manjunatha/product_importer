@@ -1,0 +1,21 @@
+#main-title{
+	text-align: center;
+}
+div.container{
+	padding-bottom: 10px;
+}
+#search-box{
+	text-align: center;
+}
+#search-box input[type="text"]{
+	line-height: 1.5;
+    padding: 5px;
+    width: 50%;
+}
+#search-btn{
+	display: inline-block;
+}
+table, th, td {
+    border: 1px solid #c3c3c3;
+    padding: 10px;
+}
