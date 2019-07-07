@@ -4,6 +4,14 @@
 div.container{
 	padding-bottom: 10px;
 }
+.add-import-product .action-col{
+	text-align: center;
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+.home-div{
+	text-align: center;
+}
 #search-box{
 	text-align: center;
 }
@@ -15,7 +23,29 @@ div.container{
 #search-btn{
 	display: inline-block;
 }
+
 table, th, td {
     border: 1px solid #c3c3c3;
     padding: 10px;
+}
+table tr th{
+	text-align: center;
+}
+table .action-btns{
+	width: 160px;
+}
+table td span{
+    width: 65px;
+    font-size: 14px !important;
+	display: inline-block;
+    text-align: center;
+}
+
+#addEditModal .product-info div{
+	padding: 10px;
+}
+
+#addEditModal .product-info span{
+	display: inline-block;
+	width: 100px;
 }

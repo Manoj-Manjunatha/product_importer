@@ -2,29 +2,46 @@
 <html>
 <head>
 	<title>Product Importer</title>
+	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<link rel="stylesheet" type="text/css" href="static/css/bootstrap/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="static/css/styles.css">
 </head>
 <body>
 	<div id="main-title"><h1> Product Importer </h1></div>
-	<div class="container">
-		<div id="upload">
-			<input type="file" name="" />
-		</div>
+	<div class="container add-import-product">
+		{% if page_title == 'Products list' %}
+			<div class="row">
+				<div id="upload" class="col-md-6 action-col">
+					Import a Product <input type="file" name="csv-file" accept=".csv" />
+				</div>
+				<div id="addProduct" class="col-md-6 action-col">
+					<button class="btn btn-success" id="add-btn">Add a Product</button>
+				</div>
+			</div>
+		{% else %}
+			<div class="row">
+				<div class="col-md-12 home-div">
+					<a href="{{url_for('main.home')}}" class="btn btn-success">Home</a>
+				</div>
+			</div>
+		{% endif %}
 	</div>
 	<div class="container">
 		<div id="search-box">
-			<input type="text" name="search" placeholder="Search for products" />
-			<div id="search-btn" class="btn btn-primary">Search</div>
+			<form action="/search" method="get">
+				<input type="text" name="keyword" placeholder="Search for products" />
+				<input type="submit" id="search-btn" class="btn btn-primary" />
+			</form>
 		</div>
 		<div id='products-list'>
-			<h4>Products list</h4>
+			<h4>{{page_title}}</h4>
 			<table>
 				<tr>
 					<th>No.</th>
 					<th>Name</th>
 					<th>SKU</th>
 					<th>Description</th>
+					<th>Actions</th>
 				</tr>
 				{% for product in products %}
 					<tr>
@@ -32,9 +49,35 @@
 						<td>{{product.name}}</td>
 						<td>{{product.sku}}</td>
 						<td>{{product.description}}</td>
+						<td class="action-btns">
+							<span class="btn btn-info edit-btn">Edit</span>
+							<span class="btn btn-danger delete-btn">Delete</span>
+						</td>
 					</tr>
 				{% endfor %}
 			</table>
+		</div>
+		<!-- Edit-Modal -->
+		<div id="addEditModal" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+
+		    <!-- Modal content-->
+		    <div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title addEditModal-title">Product</h4>
+				</div>
+				<div class="modal-body product-info">
+					<div><span>SKU</span><input type="text" name="product-sku"/></div>
+					<div><span>Name</span><input type="text" name="product-name" /></div>
+					<div><span>Description</span><textarea name="product-description"></textarea>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary save-btn">Save</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+
+			</div>
 		</div>
 	</div>
 	<script type="text/javascript" src="static/js/jquery/jquery.min.js"></script>
