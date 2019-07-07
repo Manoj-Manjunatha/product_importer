@@ -89,6 +89,7 @@ function saveProductInfo(){
 		},
 		error: function(response, status, xhr){
 			console.log(response, status, xhr);
+			$('#addEditModal .error-msg').text(status + '! ' + response.responseJSON.description);
 		}
 	});
 }
@@ -112,7 +113,7 @@ function uploadCSVFile(event){
 		cache: false,
 		contentType: false,
 		success: function(response, status, xhr){
-			console.log(xhr, response, status);
+			window.location.reload();
 		},
 		error: function(response, status, xhr){
 			console.log(xhr, response, status);

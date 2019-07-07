@@ -37,9 +37,14 @@ class ProductImportApi(Resource):
                 headers = csv_reader.next()
 
                 for row in csv_reader:
-                    product = Product()
+                    sku = unicode(row[1])
+                    product = Product.query.filter(Product.sku == sku).first()
+                    # If the record exists, then update it.
+                    if not product:
+                        product = Product()
+
+                    product.sku = sku
                     product.name = unicode(row[0])
-                    product.sku = unicode(row[1])
                     product.description = unicode(row[2])
                     db.session.add(product)
                 db.session.commit()
