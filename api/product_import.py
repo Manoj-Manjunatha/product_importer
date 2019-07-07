@@ -36,17 +36,24 @@ class ProductImportApi(Resource):
                 csv_reader = reader(csv_file)
                 headers = csv_reader.next()
 
+                products_dict = {}
                 for row in csv_reader:
-                    sku = unicode(row[1])
-                    product = Product.query.filter(Product.sku == sku).first()
-                    # If the record exists, then update it.
-                    if not product:
-                        product = Product()
+                    products_dict.update({
+                        unicode(row[1]): {
+                            'sku': unicode(row[1]),
+                            'name': unicode(row[0]),
+                            'description': unicode(row[2])
+                        }
+                    })
 
-                    product.sku = sku
-                    product.name = unicode(row[0])
-                    product.description = unicode(row[2])
+                products = Product.query.filter(Product.sku.in_(products_dict.keys())).all()
+                for product in products:
+                    prod_info = products_dict.pop(product.sku)
+                    product.name = prod_info['name']
+                    product.description = prod_info['description']
                     db.session.add(product)
+
+                db.session.bulk_insert_mappings(Product, products_dict.values())
                 db.session.commit()
 
         except Exception as e:

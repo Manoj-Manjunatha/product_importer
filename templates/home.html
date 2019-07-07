@@ -56,6 +56,14 @@
 					</tr>
 				{% endfor %}
 			</table>
+			<div class="navigation">
+				{% if prev_url %}
+					<a href="{{prev_url}}">Prev</a>
+				{% endif %}
+				{% if next_url %}
+					<a href="{{next_url}}">Next</a>
+				{% endif %}
+			</div>
 		</div>
 		<!-- Edit-Modal -->
 		<div id="addEditModal" class="modal fade" role="dialog">
