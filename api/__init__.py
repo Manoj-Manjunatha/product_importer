@@ -8,7 +8,8 @@ def configure_api(api_manager):
         ProductApi,
         '/api/product',
         '/api/product/',
-        '/api/product/<string:sku>'
+        '/api/product/<int:page>',
+        '/api/product/<string:sku>',
     )
     api_manager.add_resource(
         ProductImportApi,

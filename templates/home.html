@@ -7,21 +7,17 @@
 	<link rel="stylesheet" type="text/css" href="static/css/styles.css">
 </head>
 <body>
-	<div id="main-title"><h1> Product Importer </h1></div>
+	<div id="main-title"><h1> <a href="{{url_for('main.home')}}">Product Importer</a> </h1></div>
 	<div class="container add-import-product">
 		{% if page_title == 'Products list' %}
 			<div class="row">
 				<div id="upload" class="col-md-6 action-col">
 					Import a Product <input type="file" name="csv-file" accept=".csv" />
+					<br>
+					<a href="{{url_for('main.product_import_status')}}" target="_blank">Click here to know the status</a>
 				</div>
 				<div id="addProduct" class="col-md-6 action-col">
 					<button class="btn btn-success" id="add-btn">Add a Product</button>
-				</div>
-			</div>
-		{% else %}
-			<div class="row">
-				<div class="col-md-12 home-div">
-					<a href="{{url_for('main.home')}}" class="btn btn-success">Home</a>
 				</div>
 			</div>
 		{% endif %}
@@ -35,12 +31,14 @@
 		</div>
 		<div id='products-list'>
 			<h4>{{page_title}}</h4>
+			<i>Displaying {{num_of_results}} results</i>
 			<table>
 				<tr>
 					<th>No.</th>
 					<th>Name</th>
 					<th>SKU</th>
 					<th>Description</th>
+					<th>Active</th>
 					<th>Actions</th>
 				</tr>
 				{% for product in products %}
@@ -49,6 +47,7 @@
 						<td>{{product.name}}</td>
 						<td>{{product.sku}}</td>
 						<td>{{product.description}}</td>
+						<td>{{product.is_active}}</td>
 						<td class="action-btns">
 							<span class="btn btn-info edit-btn">Edit</span>
 							<span class="btn btn-danger delete-btn">Delete</span>
@@ -77,10 +76,11 @@
 				<div class="modal-body product-info">
 					<div><span>SKU</span><input type="text" name="product-sku"/></div>
 					<div><span>Name</span><input type="text" name="product-name" /></div>
-					<div><span>Description</span><textarea name="product-description"></textarea>
+					<div><span>Description</span><textarea name="product-description"></textarea></div>
+					<div><span>Is Active</span><input type="checkbox" name="product-active"></div>
 				</div>
 				<div class="modal-footer">
-					<div class="error-msg alert alert-warning alert-dismissible fade show"></div>
+					<div class="error-msg alert alert-warning alert-dismissible fade"></div>
 					<button type="button" class="btn btn-primary save-btn">Save</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 				</div>

@@ -1,6 +1,9 @@
 #main-title{
 	text-align: center;
 }
+#main-title h1 a{
+	text-decoration: none;
+}
 div.container{
 	padding-bottom: 10px;
 }
@@ -9,9 +12,11 @@ div.container{
 	margin-top: 30px;
 	margin-bottom: 30px;
 }
-.home-div{
-	text-align: center;
+#upload a{
+	font-size: 12px;
 }
+
+/*Search bar*/
 #search-box{
 	text-align: center;
 }
@@ -24,6 +29,7 @@ div.container{
 	display: inline-block;
 }
 
+/*Table list*/
 table, th, td {
     border: 1px solid #c3c3c3;
     padding: 10px;
@@ -41,6 +47,7 @@ table td span{
     text-align: center;
 }
 
+/*Popup*/
 #addEditModal .product-info div{
 	padding: 10px;
 }
@@ -48,4 +55,26 @@ table td span{
 #addEditModal .product-info span{
 	display: inline-block;
 	width: 100px;
+}
+.error-msg.alert.alert-warning.alert-dismissible{
+	max-width: 280px;
+	overflow-x: auto;
+	max-height: 200px;
+}
+
+/*Navigation*/
+.navigation {
+	padding: 15px;
+	margin-bottom: 20px;
+}
+.navigation a{
+	padding: 5px;
+	border: 1px solid #ffffff00;
+}
+.navigation a:hover{
+	border: 1px solid #a9a9a9;
+	border-radius: 4px;
+}
+.navigation a:last-child {
+	float: right;
 }

@@ -17,7 +17,9 @@ function addProduct(event){
 	productInputs[0].value = "";
 	productInputs[1].value = "";
 	productInputs[2].value = "";
+	productInputs[3].checked = true;
 	$(productInputs[0]).attr('readonly', false).attr('disabled', false);
+	$('#addEditModal .error-msg').removeClass('show').addClass('hide').text('');
 	$('#addEditModal .addEditModal-title').text('Add Product');
 	$('#addEditModal').modal('show');
 }
@@ -57,7 +59,9 @@ function editProductInfo(event){
 	productInputs[0].value = $(productInfo[2]).text();	// SKU.
 	productInputs[1].value = $(productInfo[1]).text();	// Name.
 	productInputs[2].value = $(productInfo[3]).text();	// Description.
+	productInputs[3].checked = ($(productInfo[4]).text() == 'True');
 	$(productInputs[0]).attr('readonly', true).attr('disabled', true);
+	$('#addEditModal .error-msg').removeClass('show').addClass('hide').text('');
 	$('#addEditModal .addEditModal-title').text('Edit Product');
 	$('#addEditModal').modal('show');
 }
@@ -70,6 +74,8 @@ function saveProductInfo(){
 	productData.append('name', $(productInputs[1]).val());
 	productData.append('sku', $(productInputs[0]).val());
 	productData.append('description', $(productInputs[2]).val());
+	if($(productInputs[3]).prop('checked'))
+		productData.append('is_active', true);
 
 	var requestType = 'POST';
 	var requestUrl = '/api/product';
@@ -89,7 +95,13 @@ function saveProductInfo(){
 		},
 		error: function(response, status, xhr){
 			console.log(response, status, xhr);
-			$('#addEditModal .error-msg').text(status + '! ' + response.responseJSON.description);
+			var errorText = status + '! ';
+			if(response.responseJSON){
+				errorText += response.responseJSON.description;
+			}else{
+				errorText += response.responseText;
+			}
+			$('#addEditModal .error-msg').removeClass('hide').addClass('show').text(errorText);
 		}
 	});
 }

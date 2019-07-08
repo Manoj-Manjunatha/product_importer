@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Product Import Status</title>
+	<link rel="stylesheet" type="text/css" href="static/css/bootstrap/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="static/css/styles.css">
+</head>
+<body>
+	<div class="container">
+		<h4>Product Import Status</h4>
+		<table>
+			<tr>
+				<th>No.</th>
+				<th>Name</th>
+				<th>UUID</th>
+				<th>Created On</th>
+				<th>Status</th>
+			</tr>
+			{% for csv in csv_records %}
+				<tr>
+					<td>{{loop.index}}</td>
+					<td>{{csv.name}}</td>
+					<td>{{csv.uuid}}</td>
+					<td>{{csv.created_at}}</td>
+					<td>
+						{% if csv.status == 'COMPLETED' %}
+							<a href="{{url_for('main.home')}}">{{csv.status}}</a>
+						{% else %}
+							{{csv.status}}
+						{% endif %}
+					</td>
+				</tr>
+			{% endfor %}
+		</table>
+	</div>
+</body>
+</html>

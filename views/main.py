@@ -1,8 +1,8 @@
 """Product import main view."""
 from flask import Blueprint, render_template, request, url_for
-from sqlalchemy import or_
+from sqlalchemy import desc, or_
 
-from models import Product
+from models import CsvFile, Product
 
 main = Blueprint('main', __name__)
 
@@ -20,6 +20,7 @@ def home(page=None):
         'next_url': next_url,
         'prev_url': prev_url,
         'products': products.items,
+        'num_of_results': len(products.items),
         'page_title': 'Products list'
     }
     return render_template('home.html', **template_args)
@@ -38,5 +39,13 @@ def search():
     ).all()
     return render_template('home.html', **{
         'products': products,
+        'num_of_results': len(products),
         'page_title': 'Search results'
     })
+
+
+@main.route('/status')
+def product_import_status():
+    """Return the status of all the csv imports."""
+    csv_records = CsvFile.query.order_by(desc(CsvFile.created_at)).all()
+    return render_template('status.html', **{'csv_records': csv_records})
