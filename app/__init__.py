@@ -1,8 +1,6 @@
 """Product import app entry point."""
 from flask import Flask
-from flask_migrate import Migrate, MigrateCommand
 from flask_restful import Api
-from flask_script import Manager, Shell, Command
 from flask_wtf.csrf import CsrfProtect
 
 from celery import Celery
@@ -24,26 +22,3 @@ configure_api(api_manager)
 
 celery = Celery(app.name, broker=app.config['CELERY_BROKER_URL'])
 celery.conf.update(app.config)
-
-
-class DevServer(Command):
-    """Runs the Flask development server."""
-
-    def __call__(self, app, **kwargs):
-        """Call app run method."""
-        self.app = app
-        self.app.run()
-
-
-manager = Manager(app)
-Migrate(app, db)
-
-manager.add_command('shell', Shell(make_context=lambda: {
-    'app': app,
-    'db': db
-}))
-manager.add_command('db', MigrateCommand)
-
-
-if __name__ == '__main__':
-    manager.run()
