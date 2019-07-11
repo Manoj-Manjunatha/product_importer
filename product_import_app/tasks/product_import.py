@@ -2,8 +2,8 @@
 import os
 from csv import reader
 
-from app import celery
-from models import CsvFile, db, Product
+from product_import_app import celery
+from product_import_app.models import CsvFile, db, Product
 
 
 @celery.task(queue='import')

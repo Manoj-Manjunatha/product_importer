@@ -2,8 +2,8 @@ from flask_migrate import Migrate, MigrateCommand
 from flask_script import Manager, Shell, Command
 
 
-from app import app
-from app.models import db
+from product_import_app import app
+from product_import_app.models import db
 
 
 class DevServer(Command):

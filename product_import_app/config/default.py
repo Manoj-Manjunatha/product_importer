@@ -24,7 +24,7 @@ CELERY_BROKER_URL = 'redis://localhost:6379/'
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_IGNORE_RESULT = True
-CELERY_IMPORTS = ('tasks', )
+CELERY_IMPORTS = ('product_import_app.tasks', )
 CELERY_QUEUES = (
     Queue('import', Exchange('import'), routing_key='import'),
 )

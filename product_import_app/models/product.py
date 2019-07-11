@@ -1,7 +1,7 @@
 """Product import app Products table."""
 from datetime import datetime
 
-from . import db
+from product_import_app.models import db
 
 
 class Product(db.Model):

@@ -2,7 +2,7 @@
 from flask import Blueprint, render_template, request, url_for
 from sqlalchemy import desc, or_
 
-from models import CsvFile, Product
+from product_import_app.models import CsvFile, Product
 
 main = Blueprint('main', __name__)
 

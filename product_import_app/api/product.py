@@ -3,7 +3,7 @@ from flask import jsonify
 from flask_restful import abort, fields, marshal, Resource, reqparse
 
 
-from models import db, Product
+from product_import_app.models import db, Product
 
 
 product_fields = {

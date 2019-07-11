@@ -6,7 +6,7 @@ from werkzeug.datastructures import FileStorage
 from flask import current_app, jsonify
 from flask_restful import abort, reqparse, Resource
 
-from models import CsvFile, db
+from product_import_app.models import CsvFile, db
 
 api_parser = reqparse.RequestParser()
 api_parser.add_argument(

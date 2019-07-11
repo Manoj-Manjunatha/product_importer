@@ -5,12 +5,12 @@ from flask_wtf.csrf import CsrfProtect
 
 from celery import Celery
 
-from api import configure_api
-from models import db
-from views import main
+from product_import_app.api import configure_api
+from product_import_app.models import db
+from product_import_app.views import main
 
 app = Flask(__name__)
-app.config.from_object('config.default')
+app.config.from_object('product_import_app.config.default')
 
 db.app = app
 db.init_app(app)

@@ -1,7 +1,7 @@
 """Product import app CSV table."""
 from datetime import datetime
 
-from . import db
+from product_import_app.models import db
 
 
 class CsvFile(db.Model):
