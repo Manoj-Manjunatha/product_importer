@@ -120,7 +120,7 @@ function uploadCSVFile(event){
     $.ajax({
     	data: csvData,
     	type: 'POST',
-    	url: '/api/product-import',
+    	url: '/api/product-import/',
     	processData: false,
 		cache: false,
 		contentType: false,

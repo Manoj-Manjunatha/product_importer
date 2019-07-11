@@ -41,7 +41,7 @@ class ProductImportApi(Resource):
             db.session.add(csv_file)
             db.session.commit()
 
-            from tasks.product_import import product_import
+            from product_import_app.tasks.product_import import product_import
             product_import.delay({
                 'media_folder': current_app.config['MEDIA_FOLDER'],
                 'uuid': csv_file.uuid
