@@ -1,1 +1,1 @@
-web: python app.py db upgrade; gunicorn app:app
+web: python app.py db upgrade; gunicorn product_import_app:app
